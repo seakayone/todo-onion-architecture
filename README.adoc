@@ -1,0 +1,2 @@
+image:https://travis-ci.org/seakayone/todo-onion-architecture.svg?branch=master["Build Status", link="https://travis-ci.org/seakayone/todo-onion-architecture"]
+

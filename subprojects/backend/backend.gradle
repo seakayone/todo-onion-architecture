@@ -50,6 +50,10 @@ dependencies {
     testCompileOnly "org.projectlombok:lombok:$lombokVersion"
 }
 
+springBoot {
+    mainClassName = 'org.kleinb.todoonion.TodoApplication'
+}
+
 test {
     useJUnitPlatform()
 }
