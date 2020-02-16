@@ -1,2 +1,2 @@
-image:https://travis-ci.org/seakayone/todo-onion-architecture.svg?branch=master["Build Status", link="https://travis-ci.org/seakayone/todo-onion-architecture"]
+image:https://travis-ci.org/seakayone/todo-onion-architecture.svg?branch=master["Build Status",link="https://travis-ci.org/seakayone/todo-onion-architecture"] image:https://img.shields.io/badge/License-Apache%202.0-blue.svg["License Apache 2.0",link="https://opensource.org/licenses/Apache-2.0"]
 
