@@ -55,4 +55,4 @@ allprojects {
     }
 }
 
-wrapper.gradleVersion "6.1.1"
+wrapper.gradleVersion '6.2'
