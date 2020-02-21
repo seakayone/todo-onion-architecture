@@ -29,21 +29,22 @@ import org.springframework.stereotype.Service;
 public class SpringDataTodoItemRepository implements TodoItemRepository {
 
   private final JpaTodoItemRepository jpaRepo;
+  private final JpaTodoItemMapper mapper;
 
   @Override
   public @NonNull Option<TodoItem> findById(@NonNull String id) {
-    return jpaRepo.findById(id).map(JpaTodoItem::asEntity);
+    return jpaRepo.findById(id).map(mapper::jpaTodoItemToTodoItem);
   }
 
   @Override
   public TodoItem save(TodoItem item) {
-    jpaRepo.save(JpaTodoItem.of(item));
+    jpaRepo.save(mapper.todoItemToJpaTodoItem(item));
     return item;
   }
 
   @Override
   public Page<TodoItem> findAll(Pageable pageable) {
     final var page = jpaRepo.findAll(pageable);
-    return page.map(JpaTodoItem::asEntity);
+    return page.map(mapper::jpaTodoItemToTodoItem);
   }
 }

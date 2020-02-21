@@ -13,26 +13,19 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package org.kleinb.todoonion.domain.service;
+package org.kleinb.todoonion.adapter.rest;
 
-import io.vavr.control.Option;
-import lombok.RequiredArgsConstructor;
 import org.kleinb.todoonion.domain.model.TodoItem;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-@Service
-@RequiredArgsConstructor
-public class TodoSearchService {
+@Mapper(componentModel = "spring")
+interface TodoItemResourceMapper {
 
-  private final TodoItemRepository itemRepo;
+  TodoItemResourceMapper INSTANCE = Mappers.getMapper(TodoItemResourceMapper.class);
 
-  public Option<TodoItem> findById(String id) {
-    return itemRepo.findById(id);
-  }
+  TodoItem todoItemToTodoItemResource(TodoItemResource item);
 
-  public Page<TodoItem> findAll(Pageable pageable) {
-    return itemRepo.findAll(pageable);
-  }
+  TodoItemResource todoItemResourceToTodoItem(TodoItem item);
 }
+

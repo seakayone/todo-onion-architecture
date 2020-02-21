@@ -15,32 +15,28 @@
  */
 package org.kleinb.todoonion.adapter.persistence;
 
-import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.kleinb.todoonion.domain.model.TodoList;
+import io.vavr.control.Option;
+import java.time.Instant;
+import lombok.NonNull;
+import org.kleinb.todoonion.domain.model.TodoItem;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-@Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class JpaTodoList {
+@Mapper(componentModel = "spring")
+public interface JpaTodoItemMapper {
 
-  @Id
-  private String id;
+  JpaTodoItemMapper INSTANCE = Mappers.getMapper(JpaTodoItemMapper.class);
 
-  @OneToMany
-  private List<JpaTodoItem> items;
+  JpaTodoItem todoItemToJpaTodoItem(TodoItem item);
 
-  public static JpaTodoList of(TodoList list) {
-    final var jpa = new JpaTodoList();
-    jpa.setId(list.getId());
-    jpa.setItems(
-        list.getItems().map(JpaTodoItemMapper.INSTANCE::todoItemToJpaTodoItem).toJavaList());
-    return jpa;
+  TodoItem jpaTodoItemToTodoItem(JpaTodoItem jpa);
+
+
+  default Instant map(@NonNull Option<Instant> value) {
+    return value.getOrNull();
+  }
+
+  default @NonNull Option<Instant> map(Instant value) {
+    return Option.of(value);
   }
 }

@@ -17,8 +17,6 @@ package org.kleinb.todoonion.adapter.rest;
 
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
-import lombok.NonNull;
-import org.kleinb.todoonion.domain.model.TodoItem;
 
 @Data
 public class TodoItemResource {
@@ -27,11 +25,4 @@ public class TodoItemResource {
 
   @NotEmpty
   private String description;
-
-  public static TodoItemResource of(@NonNull TodoItem it) {
-    final var dto = new TodoItemResource();
-    dto.setId(it.getId());
-    dto.setDescription(it.getDescription());
-    return dto;
-  }
 }

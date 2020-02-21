@@ -13,26 +13,8 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package org.kleinb.todoonion.domain.service;
+package org.kleinb.todoonion.application;
 
-import io.vavr.control.Option;
-import lombok.RequiredArgsConstructor;
-import org.kleinb.todoonion.domain.model.TodoItem;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
+public class Foo {
 
-@Service
-@RequiredArgsConstructor
-public class TodoSearchService {
-
-  private final TodoItemRepository itemRepo;
-
-  public Option<TodoItem> findById(String id) {
-    return itemRepo.findById(id);
-  }
-
-  public Page<TodoItem> findAll(Pageable pageable) {
-    return itemRepo.findAll(pageable);
-  }
 }

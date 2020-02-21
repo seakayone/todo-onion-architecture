@@ -18,7 +18,9 @@ package org.kleinb.todoonion.domain.service;
 import lombok.RequiredArgsConstructor;
 import org.kleinb.todoonion.domain.model.TodoList;
 import org.kleinb.todoonion.domain.model.TodoItem;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor
 public class TodoActionService {
 

@@ -42,6 +42,7 @@ public class TodoItemsRestApi {
 
   private final TodoActionService service;
   private final TodoSearchService todoSearchService;
+  private final TodoItemResourceMapper mapper;
 
   @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
   public ResponseEntity<TodoItemResource> create(@Valid @RequestBody TodoItemResource itemDto) {
@@ -53,7 +54,7 @@ public class TodoItemsRestApi {
   @GetMapping(value = "{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
   public ResponseEntity<TodoItemResource> get(@PathVariable String id) {
     return todoSearchService.findById(id)
-        .map(TodoItemResource::of)
+        .map(mapper::todoItemResourceToTodoItem)
         .map(it -> new ResponseEntity<>(it, OK))
         .getOrElse(() -> new ResponseEntity<>(NOT_FOUND));
   }
@@ -65,7 +66,7 @@ public class TodoItemsRestApi {
       @RequestParam int size
   ) {
     final var result = todoSearchService.findAll(PageRequest.of(page, size))
-        .map(TodoItemResource::of)
+        .map(mapper::todoItemResourceToTodoItem)
         .toList();
     return new ResponseEntity<>(result, OK);
   }

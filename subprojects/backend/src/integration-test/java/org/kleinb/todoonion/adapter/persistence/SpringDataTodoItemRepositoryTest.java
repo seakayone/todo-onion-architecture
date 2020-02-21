@@ -43,7 +43,7 @@ class SpringDataTodoItemRepositoryTest {
 
   @BeforeEach
   void setup() {
-    repo = new SpringDataTodoItemRepository(jpaRepo);
+    repo = new SpringDataTodoItemRepository(jpaRepo, JpaTodoItemMapper.INSTANCE);
   }
 
   @Test

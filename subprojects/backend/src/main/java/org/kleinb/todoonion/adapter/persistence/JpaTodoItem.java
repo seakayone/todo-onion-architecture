@@ -15,7 +15,6 @@
  */
 package org.kleinb.todoonion.adapter.persistence;
 
-import io.vavr.control.Option;
 import java.time.Instant;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,7 +22,6 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.kleinb.todoonion.domain.model.TodoItem;
 
 @Entity
 @Data
@@ -39,22 +37,4 @@ public class JpaTodoItem {
 
   private Instant dueDate;
   private boolean archived;
-
-  public static JpaTodoItem of(TodoItem item) {
-    final var jpa = new JpaTodoItem();
-    jpa.setDescription(item.getDescription());
-    jpa.setId(item.getId());
-    jpa.setArchived(item.isArchived());
-    jpa.setDueDate(item.getDueDate().getOrNull());
-    return jpa;
-  }
-
-  public TodoItem asEntity() {
-    return TodoItem.builder()
-        .id(this.getId())
-        .description(this.getDescription())
-        .archived(this.isArchived())
-        .dueDate(Option.of(this.getDueDate()))
-        .build();
-  }
 }
