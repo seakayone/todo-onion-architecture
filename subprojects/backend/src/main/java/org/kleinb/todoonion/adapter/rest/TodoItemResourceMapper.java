@@ -15,14 +15,12 @@
  */
 package org.kleinb.todoonion.adapter.rest;
 
+import org.kleinb.todoonion.adapter.VavrMapperFunctions;
 import org.kleinb.todoonion.domain.model.TodoItem;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-interface TodoItemResourceMapper {
-
-  TodoItemResourceMapper INSTANCE = Mappers.getMapper(TodoItemResourceMapper.class);
+interface TodoItemResourceMapper extends VavrMapperFunctions {
 
   TodoItem todoItemToTodoItemResource(TodoItemResource item);
 

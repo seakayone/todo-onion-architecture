@@ -40,7 +40,8 @@ public class SpringDataTodoListRepository implements TodoListRepository {
   }
 
   private List<TodoItem> asEntities(JpaTodoList it) {
-    return List.ofAll(it.getItems()).map(JpaTodoItemMapper.INSTANCE::jpaTodoItemToTodoItem);
+    return List.ofAll(it.getItems())
+        .map(JpaTodoItemMapper.INSTANCE::jpaTodoItemToTodoItem);
   }
 
   @Override

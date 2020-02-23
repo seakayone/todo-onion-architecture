@@ -15,28 +15,17 @@
  */
 package org.kleinb.todoonion.adapter.persistence;
 
-import io.vavr.control.Option;
-import java.time.Instant;
-import lombok.NonNull;
+import org.kleinb.todoonion.adapter.VavrMapperFunctions;
 import org.kleinb.todoonion.domain.model.TodoItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface JpaTodoItemMapper {
+public interface JpaTodoItemMapper extends VavrMapperFunctions {
 
   JpaTodoItemMapper INSTANCE = Mappers.getMapper(JpaTodoItemMapper.class);
 
   JpaTodoItem todoItemToJpaTodoItem(TodoItem item);
 
   TodoItem jpaTodoItemToTodoItem(JpaTodoItem jpa);
-
-
-  default Instant map(@NonNull Option<Instant> value) {
-    return value.getOrNull();
-  }
-
-  default @NonNull Option<Instant> map(Instant value) {
-    return Option.of(value);
-  }
 }

@@ -15,6 +15,8 @@
  */
 package org.kleinb.todoonion.adapter.rest;
 
+import io.vavr.control.Option;
+import java.time.Instant;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
@@ -25,4 +27,8 @@ public class TodoItemResource {
 
   @NotEmpty
   private String description;
+
+  private Option<Instant> dueDate = Option.none();
+
+  private boolean archived;
 }

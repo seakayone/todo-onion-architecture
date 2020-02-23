@@ -13,16 +13,18 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package org.kleinb.todoonion.adapter.rest;
+package org.kleinb.todoonion.adapter;
 
-import org.mapstruct.factory.Mappers;
-import org.springframework.context.annotation.Bean;
+import io.vavr.control.Option;
+import lombok.NonNull;
 
-class WebMvcTestContext {
+public interface VavrMapperFunctions {
 
-  @Bean
-  public TodoItemResourceMapper todoItemResourceMapper() {
-    return Mappers.getMapper(TodoItemResourceMapper.class);
+  default @NonNull <T> Option<T> map(T value) {
+    return Option.of(value);
+  }
+
+  default <T> T map(@NonNull Option<T> value) {
+    return value.getOrNull();
   }
 }
-

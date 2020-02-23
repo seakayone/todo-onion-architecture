@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kleinb.todoonion.domain.service.TodoItemRepository;
 import org.kleinb.todoonion.domain.model.TodoItem;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -43,7 +44,7 @@ class SpringDataTodoItemRepositoryTest {
 
   @BeforeEach
   void setup() {
-    repo = new SpringDataTodoItemRepository(jpaRepo, JpaTodoItemMapper.INSTANCE);
+    repo = new SpringDataTodoItemRepository(jpaRepo, Mappers.getMapper(JpaTodoItemMapper.class));
   }
 
   @Test

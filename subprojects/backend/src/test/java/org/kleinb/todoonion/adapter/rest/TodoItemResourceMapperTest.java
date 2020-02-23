@@ -15,8 +15,11 @@
  */
 package org.kleinb.todoonion.adapter.rest;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import io.vavr.control.Option;
+import java.time.Instant;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -31,12 +34,19 @@ class TodoItemResourceMapperTest {
 
   @Test
   void todoItemToResource() {
-    final var item = TodoItem.builder().description("foo").build();
+    final var dueDate = Instant.now().plus(5, DAYS);
+    final var item = TodoItem.builder()
+        .description("foo")
+        .dueDate(Option.of(dueDate))
+        .archived(true)
+        .build();
 
     final var actual = mapper.todoItemResourceToTodoItem(item);
 
     assertThat(actual.getDescription()).isEqualTo(item.getDescription());
     assertThat(actual.getId()).isEqualTo(item.getId());
+    assertThat(actual.getDueDate()).containsExactly(dueDate);
+    assertThat(actual.isArchived()).isTrue();
   }
 
   @Test
@@ -49,5 +59,7 @@ class TodoItemResourceMapperTest {
 
     assertThat(actual.getDescription()).isEqualTo(resource.getDescription());
     assertThat(actual.getId()).isEqualTo(resource.getId());
+    assertThat(actual.getDueDate()).isEmpty();
+    assertThat(actual.isArchived()).isFalse();
   }
 }

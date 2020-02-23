@@ -37,10 +37,10 @@ public class JpaTodoList {
   private List<JpaTodoItem> items;
 
   public static JpaTodoList of(TodoList list) {
+    final var items = list.getItems().map(JpaTodoItemMapper.INSTANCE::todoItemToJpaTodoItem);
     final var jpa = new JpaTodoList();
     jpa.setId(list.getId());
-    jpa.setItems(
-        list.getItems().map(JpaTodoItemMapper.INSTANCE::todoItemToJpaTodoItem).toJavaList());
+    jpa.setItems(items.toJavaList());
     return jpa;
   }
 }
