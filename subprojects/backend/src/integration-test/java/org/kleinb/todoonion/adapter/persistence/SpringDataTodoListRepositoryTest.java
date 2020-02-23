@@ -31,7 +31,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-@ExtendWith(SpringExtension.class)
 @DataJpaTest
 class SpringDataTodoListRepositoryTest {
 
